@@ -125,9 +125,9 @@ export function healHull(state, side, amount) {
 
 function removeDead(state, side) {
   const s = state[side];
-  const before = s.board.length;
+  const dead = s.board.filter((u) => u.hp <= 0);
   s.board = s.board.filter((u) => u.hp > 0);
-  if (s.board.length < before) logLine(state, `${before - s.board.length} unit${before - s.board.length > 1 ? 's fall' : ' falls'}.`);
+  for (const u of dead) logLine(state, `${u.name} is destroyed.`);
 }
 
 export function attack(state, side, attackerUid, targetUid) {
